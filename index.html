@@ -1,0 +1,332 @@
+<div id="booking-app" class="b-container">
+    <div id="calendar-area" class="b-card">
+        <div class="b-nav">
+            <button type="button" class="b-btn-nav" onclick="changeMonth(-1)">◀ 前月</button>
+            <div id="current-month" class="b-month-label"></div>
+            <button type="button" class="b-btn-nav" onclick="changeMonth(1)">次月 ▶</button>
+        </div>
+        <div id="calendar-grid" class="b-grid"></div>
+    </div>
+
+    <div id="time-section" class="b-card" style="margin-top: 20px;">
+        <div id="date-display" class="b-date-header-info">日付を選択すると空き状況が表示されます</div>
+        <div class="b-week-scroll">
+            <div id="week-table" class="b-week-table"></div>
+        </div>
+    </div>
+
+    <div id="form-section" class="b-card b-form" style="display:none; margin-top: 20px;">
+        <div class="b-summary" id="res-summary" style="background:#f0f7ff; padding:15px; border-radius:10px; margin-bottom:20px; border:1px solid #0073aa;"></div>
+        
+        <label class="b-label">お名前（フルネーム）</label>
+        <input type="text" id="u-name" class="b-input" placeholder="フルネームをご記入ください">
+        
+        <label class="b-label">備考（ご質問やご要望があればご記入ください）</label>
+        <textarea id="u-notes" class="b-input" rows="3" placeholder="例：脱毛がはじめてで不安、場所がわからない、など"></textarea>
+
+        <label class="b-label">メニューを選択してください（複数選択可）</label>
+        <div class="b-menu-list">
+            <p class="b-menu-cat">【カウンセリング】</p>
+            <div class="b-menu-item" onclick="toggleMenu(this)" data-name="無料カウンセリング" data-price="0" data-min="20">無料カウンセリング (20分 / 0円)</div>
+
+            <p class="b-menu-cat">【1部位】</p>
+            <div class="b-menu-item" onclick="toggleMenu(this)" data-name="初回ヒゲ脱毛" data-price="3980" data-min="15"><span style="color: #ff0000; font-weight: bold;">初回</span>ヒゲ脱毛 (15分 / 3,980円)</div>
+            <div class="b-menu-item" onclick="toggleMenu(this)" data-name="初回VIO脱毛" data-price="4980" data-min="30"><span style="color: #ff0000; font-weight: bold;">初回</span>VIO脱毛 (30分 / 4,980円)</div>
+            <div class="b-menu-item" onclick="toggleMenu(this)" data-name="初回下半身脱毛" data-price="4980" data-min="30"><span style="color: #ff0000; font-weight: bold;">初回</span>下半身脱毛 (30分 / 4,980円)</div>
+            <div class="b-menu-item" onclick="toggleMenu(this)" data-name="初回上半身脱毛" data-price="4980" data-min="30"><span style="color: #ff0000; font-weight: bold;">初回</span>上半身脱毛 (30分 / 4,980円)</div>
+            <div class="b-menu-item" onclick="toggleMenu(this)" data-name="ヒゲ脱毛(都度)" data-price="4400" data-min="15">都度ヒゲ脱毛 (15分 / 4,400円)</div>
+            <div class="b-menu-item" onclick="toggleMenu(this)" data-name="ヒゲ脱毛(回数券利用)" data-price="0" data-min="15">ヒゲ脱毛 (回数券利用 / 15分)</div>
+            <div class="b-menu-item" onclick="toggleMenu(this)" data-name="VIO脱毛(都度)" data-price="11000" data-min="30">都度VIO脱毛 (30分 / 11,000円)</div>
+            <div class="b-menu-item" onclick="toggleMenu(this)" data-name="VIO脱毛(回数券利用)" data-price="0" data-min="30">VIO脱毛 (回数券利用 / 30分)</div>
+            <div class="b-menu-item" onclick="toggleMenu(this)" data-name="下半身脱毛(都度)" data-price="11000" data-min="30">都度下半身脱毛 (30分 / 11,000円)</div>
+            <div class="b-menu-item" onclick="toggleMenu(this)" data-name="下半身脱毛(回数券利用)" data-price="0" data-min="30">下半身脱毛 (回数券利用 / 30分)</div>
+            <div class="b-menu-item" onclick="toggleMenu(this)" data-name="上半身脱毛(都度)" data-price="11000" data-min="30">都度上半身脱毛 (30分 / 11,000円)</div>
+            <div class="b-menu-item" onclick="toggleMenu(this)" data-name="上半身脱毛(回数券利用)" data-price="0" data-min="30">上半身脱毛 (回数券利用 / 30分)</div>
+
+            <p class="b-menu-cat">【2部位・3部位】</p>
+            <div class="b-menu-item" onclick="toggleMenu(this)" data-name="ヒゲ＋その他2部位セット" data-price="14630" data-min="45">ヒゲ＋その他2部位セット (45分 / 14,630円)</div>
+            <div class="b-menu-item" onclick="toggleMenu(this)" data-name="ヒゲを除く2部位セット" data-price="20900" data-min="45">ヒゲを除く2部位セット (45分 / 20,900円)</div>
+            <div class="b-menu-item" onclick="toggleMenu(this)" data-name="2部位セット(回数券利用)" data-price="0" data-min="45">2部位セット(回数券利用 / 45分)</div>
+            <div class="b-menu-item" onclick="toggleMenu(this)" data-name="ヒゲ＋その他3部位セット" data-price="23760" data-min="60">ヒゲ＋その他3部位セット (60分 / 23,760円)</div>
+            <div class="b-menu-item" onclick="toggleMenu(this)" data-name="ヒゲを除く3部位セット" data-price="29700" data-min="60">ヒゲを除く3部位セット (60分 / 29,700円)</div>
+            <div class="b-menu-item" onclick="toggleMenu(this)" data-name="3部位セット(回数券利用)" data-price="0" data-min="45">3部位セット(回数券利用 / 45分)</div>
+
+            <p class="b-menu-cat">【全身・時間制】</p>
+            <div class="b-menu-item" onclick="toggleMenu(this)" data-name="初回全身脱毛(顔除く)" data-price="12980" data-min="90"><span style="color: #ff0000; font-weight: bold;">初回</span>全身脱毛(顔除く) (90分 / 12,980円)</div>
+            <div class="b-menu-item" onclick="toggleMenu(this)" data-name="全身脱毛(顔・VIO込)" data-price="31790" data-min="90">全身脱毛（顔・VIO込） (90分 / 31,790円)</div>
+            <div class="b-menu-item" onclick="toggleMenu(this)" data-name="全身脱毛(顔・VIO込)(回数券利用)" data-price="0" data-min="90">全身脱毛(顔・VIO込)(回数券利用 / 90分)</div>
+            <div class="b-menu-item" onclick="toggleMenu(this)" data-name="時間制オーダーメイド15分" data-price="7700" data-min="20">時間制オーダーメイド (15分 / 7,700円)</div>
+            <div class="b-menu-item" onclick="toggleMenu(this)" data-name="時間制オーダーメイド15分(回数券利用)" data-price="0" data-min="20">時間制オーダーメイド15分(回数券利用)</div>
+            <div class="b-menu-item" onclick="toggleMenu(this)" data-name="時間制オーダーメイド30分" data-price="11000" data-min="45">時間制オーダーメイド (30分 / 11,000円)</div>
+            <div class="b-menu-item" onclick="toggleMenu(this)" data-name="時間制オーダーメイド30分(回数券利用)" data-price="0" data-min="45">時間制オーダーメイド30分(回数券利用)</div>
+
+            <p class="b-menu-cat">【オプション】</p>
+            <div class="b-menu-item" onclick="toggleMenu(this)" data-name="HI-EMT" data-price="6980" data-min="45">【痩身マシン】HI-EMT (30分 / 6,980円)</div>
+            <div class="b-menu-item" onclick="toggleMenu(this)" data-name="初回１カ所だけの部分脱毛" data-price="2200" data-min="10">初回１ヶ所だけの部分脱毛 (10分 / 2,200円)</div>
+            <div class="b-menu-item" onclick="toggleMenu(this)" data-name="再来１カ所だけの部分脱毛" data-price="4400" data-min="10">再来１ヶ所だけの部分脱毛 (10分 / 4,400円)</div>
+            <div class="b-menu-item" onclick="toggleMenu(this)" data-name="眉毛スタイリング" data-price="2200" data-min="15">眉毛スタイリング (15分 / 2,200円)</div>
+        </div>
+
+        <div class="b-total-box">
+            合計時間: <span id="total-time">0</span> 分<br>
+            合計金額: <span id="total-price-disp">0</span> 円
+        </div>
+
+        <button type="button" id="submit-button" class="b-btn-submit" onclick="submitBooking()">この内容で予約を確定する</button>
+
+        <div id="error-msg-box" class="b-error-box" style="display:none; margin-top: 15px;">
+            <div class="b-error-icon">⚠️</div>
+            <div id="error-text" class="b-error-content"></div>
+        </div>
+        <div id="status-msg" style="text-align:center; margin-top:10px; font-weight:bold; color:#0073aa;"></div>
+    </div>
+
+    <div id="thanks-section" class="b-card" style="display:none; text-align:center; padding: 40px 20px;">
+        <div style="font-size: 60px; color: #4caf50;">✔</div>
+        <h2 style="margin: 10px 0 !important; color:#333 !important;">予約が確定しました</h2>
+        <p style="color:#666; font-size:14px; margin-bottom: 20px;">ご来店を心よりお待ちしております。</p>
+
+        <div style="background: #fff9e6; border: 1px solid #ffeeba; color: #856404; padding: 12px; border-radius: 8px; font-size: 13px; margin-bottom: 20px; display: flex; align-items: center; justify-content: center; gap: 8px;">
+            <span style="font-size: 20px;">📸</span>
+            <span><strong>スクリーンショット</strong>をして頂くと<br>ご予約の確認に便利です。</span>
+        </div>
+        
+        <div id="booking-details" class="b-details-box" style="text-align: left; background: #f9f9f9; padding: 15px; border-radius: 10px; margin: 20px 0; line-height: 1.8;"></div>
+        
+        <button class="b-btn-submit" style="background:#666;" onclick="location.reload()">トップに戻る</button>
+    </div>
+</div>
+
+<style>
+.b-container { max-width: 600px; margin: 0 auto; font-family: sans-serif; color: #333; }
+.b-card { background: #fff !important; border: 1px solid #e0e0e0 !important; border-radius: 16px; padding: 20px; margin-bottom:15px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); }
+.b-nav { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
+.b-month-label { font-weight: bold; font-size: 20px; }
+.b-btn-nav { padding: 8px 15px; background: #f5f5f5; border: 1px solid #ddd; border-radius: 8px; cursor: pointer; }
+.b-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; }
+.b-day { height: 45px; display: flex; align-items: center; justify-content: center; border-radius: 8px; cursor: pointer; border: 1px solid #f0f0f0; }
+.b-day.selected { background: #0073aa !important; color: #fff !important; }
+.b-day.today { border: 2px solid #0073aa; font-weight: bold; }
+
+/* 日付と時間のセクション */
+.b-date-header-info { margin-bottom: 10px; font-size: 14px; color: #666; text-align: center; }
+.b-week-scroll { 
+    overflow-x: auto; 
+    overflow-y: auto; /* 縦スクロールを有効化 */
+    max-height: 550px; /* スマホで日付が隠れない程度の高さ */
+    border-radius: 10px; 
+    border: 1px solid #eee; 
+    position: relative; /* 子要素のstickyの基準 */
+}
+.b-week-table { display: flex; min-width: max-content; }
+.b-day-column { flex: 0 0 95px; border-right: 1px solid #eee; padding: 0 5px 10px; }
+
+/* 日付ヘッダーの固定 */
+.b-day-header { 
+    padding: 10px 0; 
+    font-weight: bold; 
+    text-align: center; 
+    background: #0073aa; 
+    color: #fff; 
+    margin-bottom: 10px;
+    position: sticky; 
+    top: 0; 
+    z-index: 10;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.b-slot { height: 40px; margin-bottom: 6px; display: flex; align-items: center; justify-content: center; border: 1px solid #0073aa !important; border-radius: 6px; cursor: pointer; font-size: 13px; background: #fff; }
+.b-slot.booked { background: #fee !important; border-color: #fcc !important; color: #d33 !important; cursor: not-allowed; }
+.b-slot.active { background: #0073aa !important; color: #fff !important; }
+
+.b-label { display: block; margin: 20px 0 8px; font-weight: bold; }
+.b-input { width: 100%; padding: 14px; border: 2px solid #ddd; border-radius: 10px; box-sizing: border-box; }
+.b-menu-cat { margin: 20px 0 10px; padding: 5px 10px; background: #f0f7ff; border-left: 4px solid #0073aa; font-weight: bold; font-size: 13px; }
+.b-menu-item { padding: 12px; border: 1px solid #ddd; border-radius: 8px; cursor: pointer; margin-bottom: 8px; font-size: 14px; background:#fff; }
+.b-menu-item.selected { background: #e3f2fd; border-color: #0073aa; color: #0073aa; font-weight: bold; }
+.b-total-box { padding: 20px; background: #f8f9fa; border-radius: 10px; text-align: right; margin: 20px 0; }
+.b-btn-submit { width: 100%; padding: 18px; background: #0073aa; color: #fff; border: none; border-radius: 12px; font-weight: bold; cursor: pointer; font-size: 18px; }
+.b-btn-submit:disabled { background: #ccc; }
+.b-error-box { padding: 15px; background: #fff5f5; border: 1px solid #feb2b2; border-radius: 10px; display: flex; align-items: center; color: #c53030; }
+.b-error-icon { font-size: 24px; margin-right: 12px; }
+.b-details-box { background: #f9f9f9; padding: 15px; border-radius: 10px; margin: 15px 0; text-align: left; }
+</style>
+
+<script>
+(function() {
+    var gasUrl = 'https://script.google.com/macros/s/AKfycbwIGKfQy7g_eCp2Eyt_pHTTgWxppuLNE3cyrC3nH5ugGApOQTHvIa1SulDQpxFvoKM/exec';
+    var viewDate = new Date();
+    var selDate = "", selTime = "";
+
+    function init() { renderCalendar(); selectDay(formatDate(new Date())); }
+    window.changeMonth = (d) => { viewDate.setMonth(viewDate.getMonth() + d); renderCalendar(); };
+    function formatDate(dt) { return dt.getFullYear() + '-' + ('0'+(dt.getMonth()+1)).slice(-2) + '-' + ('0'+dt.getDate()).slice(-2); }
+
+    function renderCalendar() {
+        var grid = document.getElementById('calendar-grid');
+        document.getElementById('current-month').innerText = viewDate.getFullYear() + "年 " + (viewDate.getMonth() + 1) + "月";
+        var html = '';
+        ['日','月','火','水','木','金','土'].forEach(w => html += `<div style="text-align:center;font-size:11px;color:#aaa;">${w}</div>`);
+        var first = new Date(viewDate.getFullYear(), viewDate.getMonth(), 1).getDay();
+        var last = new Date(viewDate.getFullYear(), viewDate.getMonth() + 1, 0).getDate();
+        for(let i=0; i<first; i++) html += '<div></div>';
+        for(let d=1; d<=last; d++) {
+            let curr = formatDate(new Date(viewDate.getFullYear(), viewDate.getMonth(), d));
+            let isToday = curr === formatDate(new Date());
+            let cls = "b-day" + (curr === selDate ? " selected" : "") + (isToday ? " today" : "");
+            html += `<div class="${cls}" onclick="selectDay('${curr}')">${d}</div>`;
+        }
+        grid.innerHTML = html;
+    }
+
+    window.selectDay = async function(dStr) {
+        selDate = dStr; renderCalendar();
+        var table = document.getElementById('week-table');
+        table.innerHTML = '<div style="padding:40px; text-align:center; width:100%;">読み込み中...</div>';
+        try {
+            let res = await fetch(gasUrl + "?date=" + dStr);
+            let allBooked = await res.json();
+            let weekHtml = '';
+            for(let i=0; i<7; i++) {
+                let target = new Date(dStr.replace(/-/g, '/')); 
+                target.setDate(target.getDate() + i);
+                let dString = formatDate(target);
+                let dayOfWeek = target.getDay();
+
+                weekHtml += `<div class="b-day-column"><div class="b-day-header">${target.getMonth()+1}/${target.getDate()}</div>`;
+                
+                let dayBooked = allBooked.filter(b => b.date === dString);
+                let isHoliday = dayBooked.some(b => b.title === "日本の祝日");
+                let isAllDayOff = dayBooked.some(b => b.start === "0:00" && b.end === "23:59");
+                
+                if(isAllDayOff) {
+                    weekHtml += '<div style="text-align:center;padding:20px;color:#ccc;font-size:12px;">店休日</div></div>';
+                    continue;
+                }
+
+                let closingHour = (dayOfWeek === 0 || dayOfWeek === 6 || isHoliday) ? 21 : 22;
+
+                for(let h=10; h < closingHour; h++) {
+                    ['00','15','30','45'].forEach(m => {
+                        let t = h + ":" + m;
+                        let isB = dayBooked.some(b => {
+                            let ts = t.split(':').reduce((acc,v)=>acc*60+ +v,0);
+                            let bs = b.start.split(':').reduce((acc,v)=>acc*60+ +v,0);
+                            let be = b.end.split(':').reduce((acc,v)=>acc*60+ +v,0);
+                            return ts >= bs && ts < be;
+                        });
+                        weekHtml += `<div class="b-slot ${isB?'booked':''}" ${isB?'':`onclick="clickTime('${dString}','${t}')"`} data-dt="${dString}_${t}">${isB?'×':'○ '+t}</div>`;
+                    });
+                }
+                weekHtml += '</div>';
+            }
+            table.innerHTML = weekHtml;
+            if(selTime) {
+                const activeSlot = document.querySelector(`[data-dt="${selDate}_${selTime}"]`);
+                if(activeSlot) activeSlot.classList.add('active');
+            }
+        } catch(e) { table.innerHTML = 'エラーが発生しました'; }
+    };
+
+    window.clickTime = (d, t) => {
+        selDate = d; selTime = t;
+        document.querySelectorAll('.b-slot').forEach(s => s.classList.remove('active'));
+        const target = document.querySelector(`[data-dt="${d}_${t}"]`);
+        if(target) target.classList.add('active');
+        const formSec = document.getElementById('form-section');
+        formSec.style.display = 'block';
+        updateSummary();
+        setTimeout(() => { formSec.scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 100);
+    };
+
+    window.toggleMenu = (el) => { el.classList.toggle('selected'); updateSummary(); };
+
+    function updateSummary() {
+        var time = 0, price = 0;
+        document.querySelectorAll('.b-menu-item.selected').forEach(el => {
+            time += parseInt(el.getAttribute('data-min'));
+            price += parseInt(el.getAttribute('data-price'));
+        });
+        document.getElementById('total-time').innerText = time;
+        document.getElementById('total-price-disp').innerText = price.toLocaleString();
+        document.getElementById('res-summary').innerHTML = `<div style="font-size:14px; color:#555;">選択中の日時</div><div style="font-size:18px; font-weight:bold;">${selDate.replace(/-/g,'/')} ${selTime} 〜</div>`;
+    }
+
+    window.submitBooking = function() {
+        var name = document.getElementById('u-name').value;
+        var menus = [];
+        document.querySelectorAll('.b-menu-item.selected').forEach(el => menus.push(el.getAttribute('data-name')));
+        
+        if(!name) return alert("お名前を入力してください。");
+        if(menus.length === 0) return alert("メニューを選択してください。");
+
+        var totalTime = document.getElementById('total-time').innerText;
+        var totalPrice = document.getElementById('total-price-disp').innerText;
+        var btn = document.getElementById('submit-button');
+        var errBox = document.getElementById('error-msg-box');
+        
+        // submitBooking関数内
+        var postData = {
+        name: name,
+        notes: document.getElementById('u-notes').value, // ここを追加
+         menu: menus.join('、'),
+        date: selDate,
+        time: selTime,
+        price: totalPrice,
+        duration: totalTime
+        };
+
+        btn.disabled = true;
+        errBox.style.display = 'none';
+        document.getElementById('status-msg').innerText = "予約を確定しています...";
+
+        fetch(gasUrl, { method: "POST", body: JSON.stringify(postData) })
+        .then(r => r.text())
+        .then(result => {
+            if (result.includes("Success")) {
+    document.getElementById('booking-details').innerHTML = `
+        <div style="border-bottom: 1px dashed #ccc; padding-bottom: 10px; margin-bottom: 10px;">
+            <strong>■ ご予約日時</strong><br>
+            ${selDate.replace(/-/g,'/')} ${selTime} 〜
+        </div>
+        <div style="border-bottom: 1px dashed #ccc; padding-bottom: 10px; margin-bottom: 10px;">
+            <strong>■ メニュー</strong><br>
+            ${postData.menu}
+        </div>
+        <div style="border-bottom: 1px dashed #ccc; padding-bottom: 10px; margin-bottom: 10px;">
+            <strong>■ 備考（ご要望など）</strong><br>
+            ${postData.notes || "なし"}
+        </div>
+        <div style="display: flex; justify-content: space-between; align-items: center; background: #fff; padding: 10px; border-radius: 8px;">
+            <div>
+                <strong>■ 所要時間</strong><br>
+                <span>${totalTime} 分</span>
+            </div>
+            <div style="text-align: right;">
+                <strong>■ 合計金額（目安）</strong><br>
+                <span style="font-size:18px; color:#d33; font-weight:bold;">${totalPrice} 円</span>
+            </div>
+        </div>
+    `;
+                document.getElementById('calendar-area').style.display = 'none';
+                document.getElementById('time-section').style.display = 'none';
+                document.getElementById('form-section').style.display = 'none';
+                document.getElementById('thanks-section').style.display = 'block';
+                window.scrollTo(0,0);
+            } else {
+                let msg = result.includes("Conflict") ? "申し訳ありません。タッチの差で他の予約が入りました。" : "エラーが発生しました。再度お試しください。";
+                document.getElementById('error-text').innerHTML = msg;
+                errBox.style.display = 'flex';
+                btn.disabled = false;
+                document.getElementById('status-msg').innerText = "";
+            }
+        })
+        .catch(e => {
+            document.getElementById('error-text').innerHTML = "通信エラーが発生しました。";
+            errBox.style.display = 'flex';
+            btn.disabled = false;
+        });
+    };
+    init();
+})();
+</script>
