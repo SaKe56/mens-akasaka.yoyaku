@@ -1,20 +1,42 @@
-<div id="booking-app" class="b-container">
-    <div id="calendar-area" class="b-card">
-        <div class="b-nav">
-            <button type="button" class="b-btn-nav" onclick="changeMonth(-1)">◀ 前月</button>
-            <div id="current-month" class="b-month-label"></div>
-            <button type="button" class="b-btn-nav" onclick="changeMonth(1)">次月 ▶</button>
-        </div>
-        <div id="calendar-grid" class="b-grid"></div>
-    </div>
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Men's【a:r】 Akasaka 予約システム</title>
+</head>
+<body style="margin: 0; padding: 0; background-color: #f5f5f5;">
 
-    <div id="time-section" class="b-card" style="margin-top: 20px;">
-        <div id="date-display" class="b-date-header-info">日付を選択すると空き状況が表示されます</div>
-        <div class="b-week-scroll">
-            <div id="week-table" class="b-week-table"></div>
-        </div>
-    </div>
+    <header style="background-color: #fff; padding: 25px 15px; text-align: center; border-bottom: 2px solid #0073aa; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
+        <h1 style="color: #333; margin: 0; font-size: 24px; font-weight: bold;">Men's【a:r】 Akasaka</h1>
+        <p style="color: #0073aa; font-weight: bold; margin: 8px 0 0; font-size: 14px;">【完全予約制】メンズ専門の癒やし空間</p>
+    </header>
 
+    <div style="padding: 15px;">
+        <div id="booking-app" class="b-container">
+            <div id="calendar-area" class="b-card">
+                <div class="b-nav">
+                    <button type="button" class="b-btn-nav" onclick="changeMonth(-1)">◀ 前月</button>
+                    <div id="current-month" class="b-month-label"></div>
+                    <button type="button" class="b-btn-nav" onclick="changeMonth(1)">次月 ▶</button>
+                </div>
+                <div id="calendar-grid" class="b-grid"></div>
+            </div>
+
+            <div id="time-section" class="b-card" style="margin-top: 20px;">
+                <div id="date-display" class="b-date-header-info">日付を選択すると空き状況が表示されます</div>
+                <div class="b-week-scroll">
+                    <div id="week-table" class="b-week-table"></div>
+                </div>
+            </div>
+
+            <section style="text-align: center; padding: 20px; background-color: #eef7ff; border-radius: 12px; margin: 20px 0; border: 1px dashed #0073aa;">
+                <p style="margin-bottom: 15px; font-weight: bold; font-size: 14px; color: #333;">ご不明点や電話でのご予約はこちらから</p>
+                <a href="tel:03-0000-0000" style="display: inline-block; background-color: #0073aa; color: white; padding: 12px 30px; text-decoration: none; border-radius: 30px; font-weight: bold; font-size: 16px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+                    📞 TELで問い合わせる
+                </a>
+            </section>
+            
     <div id="form-section" class="b-card b-form" style="display:none; margin-top: 20px;">
         <div class="b-summary" id="res-summary" style="background:#f0f7ff; padding:15px; border-radius:10px; margin-bottom:20px; border:1px solid #0073aa;"></div>
         
