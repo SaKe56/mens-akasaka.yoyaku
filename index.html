@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Men's【a:r】 Akasaka 予約システム</title>
+    <title>Men's【a:r】 Akasaka ご予約</title>
 </head>
 <body style="margin: 0; padding: 0; background-color: #f5f5f5;">
 
@@ -40,11 +40,13 @@
     <div id="form-section" class="b-card b-form" style="display:none; margin-top: 20px;">
         <div class="b-summary" id="res-summary" style="background:#f0f7ff; padding:15px; border-radius:10px; margin-bottom:20px; border:1px solid #0073aa;"></div>
         
-        <label class="b-label">お名前（フルネーム）</label>
-        <input type="text" id="u-name" class="b-input" placeholder="フルネームをご記入ください">
-        
-        <label class="b-label">備考（ご質問やご要望があればご記入ください）</label>
-        <textarea id="u-notes" class="b-input" rows="3" placeholder="例：脱毛がはじめてで不安、場所がわからない、など"></textarea>
+        <label class="b-label">※お名前（フルネーム）</label>
+<input type="text" id="u-name" class="b-input" placeholder="フルネームをご記入ください">
+
+<label class="b-label">※お電話番号（ご新規様はご記入をお願いします）</label>
+<input type="tel" id="u-tel" class="b-input" placeholder="例：09012345678">
+<label class="b-label">備考（ご質問やご要望があればご記入ください）</label>
+<textarea id="u-notes" class="b-input" rows="3" placeholder="例：脱毛がはじめてで不安、場所がわからない、など"></textarea>
 
         <label class="b-label">メニューを選択してください（複数選択可）</label>
         <div class="b-menu-list">
@@ -290,6 +292,7 @@
         // submitBooking関数内
         var postData = {
         name: name,
+        tel: tel,
         notes: document.getElementById('u-notes').value, // ここを追加
          menu: menus.join('、'),
         date: selDate,
