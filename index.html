@@ -9,7 +9,7 @@
 
     <header style="background-color: #fff; padding: 25px 15px; text-align: center; border-bottom: 2px solid #0073aa; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
         <h1 style="color: #333; margin: 0; font-size: 24px; font-weight: bold;">Men's【a:r】 Akasaka</h1>
-        <p style="color: #0073aa; font-weight: bold; margin: 8px 0 0; font-size: 14px;">【完全予約制】メンズ専門の癒やし空間</p>
+        <p style="color: #0073aa; font-weight: bold; margin: 8px 0 0; font-size: 14px;">【完全予約制】メンズ美容 脱毛サロン</p>
     </header>
 
     <div style="padding: 15px;">
@@ -32,7 +32,7 @@
 
             <section style="text-align: center; padding: 20px; background-color: #eef7ff; border-radius: 12px; margin: 20px 0; border: 1px dashed #0073aa;">
                 <p style="margin-bottom: 15px; font-weight: bold; font-size: 14px; color: #333;">ご不明点や電話でのご予約はこちらから</p>
-                <a href="tel:03-0000-0000" style="display: inline-block; background-color: #0073aa; color: white; padding: 12px 30px; text-decoration: none; border-radius: 30px; font-weight: bold; font-size: 16px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+                <a href="tel:08073550333" style="display: inline-block; background-color: #0073aa; color: white; padding: 12px 30px; text-decoration: none; border-radius: 30px; font-weight: bold; font-size: 16px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
                     📞 TELで問い合わせる
                 </a>
             </section>
@@ -278,10 +278,12 @@
 
     window.submitBooking = function() {
         var name = document.getElementById('u-name').value;
+        var tel = document.getElementById('u-tel').value;
         var menus = [];
         document.querySelectorAll('.b-menu-item.selected').forEach(el => menus.push(el.getAttribute('data-name')));
         
         if(!name) return alert("お名前を入力してください。");
+        if(!tel) return alert("電話番号を入力してください。");
         if(menus.length === 0) return alert("メニューを選択してください。");
 
         var totalTime = document.getElementById('total-time').innerText;
