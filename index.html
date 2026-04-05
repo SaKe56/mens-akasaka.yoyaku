@@ -115,7 +115,8 @@
             <span><strong>スクリーンショット</strong>をして頂くと<br>ご予約の確認に便利です。</span>
         </div>
         
-        <div id="booking-details" class="b-details-box" style="text-align: left; background: #f9f9f9; padding: 15px; border-radius: 10px; margin: 20px 0; line-height: 1.8;"></div>
+        <div id="gcal-btn-container" style="margin-top:15px;text-align:center;"></div>
+            <div id="booking-details" class="b-details-box" style="text-align: left; background: #f9f9f9; padding: 15px; border-radius: 10px; margin: 20px 0; line-height: 1.8;"></div>
         
         <button class="b-btn-submit" style="background:#666;" onclick="location.reload()">トップに戻る</button>
     </div>
@@ -335,6 +336,24 @@
             </div>
         </div>
     `;
+                
+                // Googleカレンダーリンク生成（お客様向け）
+                var timeParts = selTime.split(':');
+                var sh = parseInt(timeParts[0]);
+                var sm = parseInt(timeParts[1]);
+                var totalMin = parseInt(totalTime) || 60;
+                var endTotalMin = sh * 60 + sm + totalMin;
+                var endH = Math.floor(endTotalMin / 60);
+                var endM = endTotalMin % 60;
+                var dateForCal = selDate.replace(/-/g, '');
+                var startCalStr = dateForCal + 'T' + String(sh).padStart(2,'0') + String(sm).padStart(2,'0') + '00';
+                var endCalStr = dateForCal + 'T' + String(endH).padStart(2,'0') + String(endM).padStart(2,'0') + '00';
+                var calTitle = encodeURIComponent("Men's [a:r] Akasaka ご予約");
+                var calDetails = encodeURIComponent('\u30e1\u30cb\u30e5\u30fc: ' + postData.menu + '\n\u5099\u8003: ' + (postData.notes || '\u306a\u3057') + '\n\u304a\u540d\u524d: ' + postData.name);
+                var calLocation = encodeURIComponent("Men's [a:r] Akasaka\uff08\u8d64\u5742\uff09");
+                var calUrl = 'https://calendar.google.com/calendar/render?action=TEMPLATE&text=' + calTitle + '&dates=' + startCalStr + '/' + endCalStr + '&details=' + calDetails + '&location=' + calLocation;
+                document.getElementById('gcal-btn-container').innerHTML = '<a href="' + calUrl + '" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:8px;margin-top:10px;padding:12px 22px;background:#4285f4;color:#fff;border-radius:10px;text-decoration:none;font-weight:bold;font-size:15px;box-shadow:0 2px 8px rgba(66,133,244,0.35);">&#128197; Google\u30ab\u30ec\u30f3\u30c0\u30fc\u306b\u8ffd\u52a0\u3059\u308b</a>';
+
                 document.getElementById('calendar-area').style.display = 'none';
                 document.getElementById('time-section').style.display = 'none';
                 document.getElementById('form-section').style.display = 'none';
